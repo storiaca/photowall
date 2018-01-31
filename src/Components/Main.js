@@ -15,9 +15,9 @@ class Main extends Component {
                 <Route exact path = "/" render={() =>(
                     <div>
                         <Title title = {'Photowall'}/> 
-                        {/* <PhotoWall posts = {this.state.posts} onRemovePhoto={this.removePhoto} onNavigate={this.navigate}/>  */}
+                        <PhotoWall posts = {this.props.posts} /> 
                     </div>
-                )}/> 
+                )}/>  
 
                 {/* <Route path = "/AddPhoto" render = {({history}) => (
                     <AddPhoto onAddPhoto = {(addedPost) => {
