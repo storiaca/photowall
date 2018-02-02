@@ -22,7 +22,6 @@ class AddPhoto extends Component {
     render() { 
         return  (
             <div>
-                <h1>Photowall</h1>
                 <div className="form">
                     <form onSubmit={this.handleSumbit}>
                         <input type="text" placeholder="Link" name="link"/>
