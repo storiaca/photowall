@@ -21,12 +21,9 @@ class Main extends Component {
                     </div>
                 )}/>  
 
-                {/* <Route path = "/AddPhoto" render = {({history}) => (
-                    <AddPhoto onAddPhoto = {(addedPost) => {
-                        this.addPhoto(addedPost)
-                        history.push('/')
-                    }}/>
-                )}/>  */}
+                <Route path = "/AddPhoto" render = {({history}) => (
+                    <AddPhoto {...this.props} onHistory={history}/>
+                )}/> 
             </div>
         )
     }
