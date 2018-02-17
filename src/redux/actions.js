@@ -3,7 +3,7 @@ import {database} from '../database/config'
 // update database
 export function startAddingPost(post) {
     return (dispatch) => {
-        return database.ref('post').update({[post.id]: post}).then(() => {
+        return database.ref('posts').update({[post.id]: post}).then(() => {
             dispatch(addPost(post))
         }).catch((error) => {
             console.log(error)
@@ -11,6 +11,18 @@ export function startAddingPost(post) {
     }
 }
 
+// loading posts from database
+export function startLoadingPost() {
+    return (dispatch) => {
+        return database.ref('posts').once('value').then((snapshot) => {
+            let posts = []
+            snapshot.forEach((childSnapshot) => {
+                posts.push(childSnapshot.val())
+            })
+            dispatch(loadPosts(posts))
+        })
+    }
+}
 // remove action
 
 export function removePost(index) {
@@ -36,5 +48,13 @@ export function addComment(comment, postId) {
         type: 'ADD_COMMENT',
         comment, 
         postId
+    }
+}
+
+// load posts
+export function loadPosts(posts) {
+    return {
+        type: 'LOAD_POSTS',
+        posts
     }
 }
