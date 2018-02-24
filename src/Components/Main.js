@@ -6,10 +6,7 @@ import {Route, Link} from 'react-router-dom'
 import Single from './Single'
 
 class Main extends Component {
-    // constructor() {
-    //     super()
-    // }
-
+ 
     componentDidMount() {
         this.props.startLoadingPost()
     }
