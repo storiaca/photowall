@@ -27,8 +27,13 @@ export function startLoadingPost() {
 }
 
 export function startRemovingPost(index, id) {
+    const updates = {
+        [`posts/${id}`]: null,
+        [`comments/${id}`]: null
+    }
+        
     return (dispatch) => {
-        return database.ref(`posts/${id}`).remove().then(() => {
+        return database.ref().update(updates).remove().then(() => {
             dispatch(removePost(index))
         }).catch((error) => {
             console.log(error)
@@ -54,6 +59,8 @@ export function startLoadingComments() {
                 comments[childSnapshot.key] = Object.values(childSnapshot.val())
             })
             dispatch(loadComments(comments))
+        }).catch((error) => {
+            console.log(error)
         })
     }
 }
