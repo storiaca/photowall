@@ -38,13 +38,35 @@ export function startRemovingPost(index, id) {
 
 export function startAddingComment(comment, postId) {
     return(dispatch) => {
-        return database.ref('comment/' + postId).push(comment).then(() => {
+        return database.ref('comments/' + postId).push(comment).then(() => {
             dispatch(addComment(comment, postId))
         }).catch((error) => {
             console.log(error)
         })
     }
 }
+
+export function startLoadingComments() {
+    return (dispatch) => {
+        return database.ref('comments').once('value').then((snapshot) => {
+            let comments = {}
+            snapshot.forEach((childSnapshot) => {
+                comments[childSnapshot.key] = Object.values(childSnapshot.val())
+            })
+            dispatch(loadComments(comments))
+        })
+    }
+}
+
+// load comments
+
+export function loadComments(comments) {
+    return {
+        type: 'LOAD_COMMENTS',
+        comments
+    }
+}
+
 // remove action
 
 export function removePost(index) {
